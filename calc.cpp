@@ -39,31 +39,25 @@ int rozpalStos(int* sstos) {
     }
 }
 //-----------------------------------------╝
-int licz(int* ssstos, char b) {
+int licz(int* sstos, char b) {
     cout<< "b:" << b<<endl;
     switch (b) {
     case  '+':
-        //cout << "dodawanie";
-        return zeStosu(ssstos) + zeStosu(ssstos);
+        return zeStosu(sstos) + zeStosu(sstos);
         break;
     case '-':
-        //cout << "odejmowanie";
-        return zeStosu(ssstos) - zeStosu(ssstos);
+        return zeStosu(sstos) - zeStosu(sstos);
         break;
     case '*':
-        //cout << "mnozenie";
-
-        return zeStosu(ssstos) * zeStosu(ssstos);
+        return zeStosu(sstos) * zeStosu(sstos);
         break;
     case '/':
-        //cout << "dzielenie";
-        return zeStosu(ssstos) / zeStosu(ssstos);
+        return zeStosu(sstos) / zeStosu(sstos);
         break;
     default:
         cout << "errroo";
         return 0;
     }
-
 }
 
 int main()
@@ -81,9 +75,7 @@ int main()
         if (dzialanie[i] == '*' || dzialanie[i] == '/') znaki[i] = 2 + d;
         if (dzialanie[i] == '(') d += 10;
         if (dzialanie[i] == ')') d += -10;
-        //cout << znaki[i] << ",";
     }
-    //cout << "tab\n";
     //sortowanie piorytetu operacji matematycznej
     for (int x = 0; x < dzialanie.length(); x++) {
         for (int i = 0; i < dzialanie.length(); i++) {
@@ -91,29 +83,17 @@ int main()
                 bufor = i;
             }
         }
-        //cout << znaki[bufor] << ",";
         piorytet[x] = bufor;
         znaki[bufor] = 0;
         bufor = 0;
     }
-    for (int i = 0; i < dzialanie.length(); i++) {
-        if (piorytet[i] > 0) {
-            //cout << endl << piorytet[i] << ",piorytet\n";
-            //cout << dzialanie[piorytet[i]] << ",dzialanie\n";
-        }
-
-    }
-    int stos1[11] = { 0 };
+    int stos1[11] = { 0 }; //tworzenie nowego stosu
     stos1[0] = 0; //pływak stosu
-
-    naStos(dzialanie[piorytet[0] - 1]- 48, stos1);
+    //operacje matematyczne na stosie
     naStos(dzialanie[piorytet[0] + 1] - 48, stos1);
-    naStos(licz(stos1, dzialanie[piorytet[0]]),stos1);
-
-    for (int i = 1; i < dzialanie.length() && piorytet[i] > 0; i++) {
-            naStos(dzialanie[piorytet[i] - 1] - 48, stos1);
-            naStos(licz(stos1, dzialanie[piorytet[i]]), stos1);
-            
+    for (int i = 0; i < dzialanie.length() && piorytet[i] > 0; i++) {
+        naStos(dzialanie[piorytet[i] - 1] - 48, stos1);
+        naStos(licz(stos1, dzialanie[piorytet[i]]), stos1);
     }
     rozpalStos(stos1);
 
