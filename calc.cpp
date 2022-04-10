@@ -30,7 +30,7 @@ int zeStosu(int* sstos) {
 }
 int rozpalStos(int* sstos) {
     if (!czyPusty(sstos)) {
-        cout << sstos[sstos[0]]<<endl;
+        cout <<"rozpalono" << sstos[sstos[0]] << endl;
         return sstos[sstos[0]];
     }
     else {
@@ -62,7 +62,7 @@ int licz(int* sstos, char b) {
 
 int main()
 {
-    string dzialanie = "1+(2*(3+4))";
+    string dzialanie = "2-2+3+(2+2)-2";
     int znaki[20] = { 0 }; //przechowuje znaki aperacji matematycznej
     short d = 0; //zmienna operacyjna dla pętli - |nadawanie piorytetu dla operacji matematycznej|
     short bufor = 0; //zmienna operacyjna dla pętli - |sortowanie piorytetu operacji matematycznej| - przechowuje numer tablicy 
@@ -75,7 +75,9 @@ int main()
         if (dzialanie[i] == '*' || dzialanie[i] == '/') znaki[i] = 2 + d;
         if (dzialanie[i] == '(') d += 10;
         if (dzialanie[i] == ')') d += -10;
+        cout << znaki[i] << ",";
     }
+    cout << endl;
     //sortowanie piorytetu operacji matematycznej
     for (int x = 0; x < dzialanie.length(); x++) {
         for (int i = 0; i < dzialanie.length(); i++) {
@@ -83,18 +85,45 @@ int main()
                 bufor = i;
             }
         }
+        cout << znaki[bufor] << ",";
         piorytet[x] = bufor;
         znaki[bufor] = 0;
         bufor = 0;
     }
-    int stos1[11] = { 0 }; //tworzenie nowego stosu
-    stos1[0] = 0; //pływak stosu
-    //operacje matematyczne na stosie
-    naStos(dzialanie[piorytet[0] + 1] - 48, stos1);
-    for (int i = 0; i < dzialanie.length() && piorytet[i] > 0; i++) {
-        naStos(dzialanie[piorytet[i] - 1] - 48, stos1);
-        naStos(licz(stos1, dzialanie[piorytet[i]]), stos1);
-    }
-    rozpalStos(stos1);
+    for (int i = 0; i < dzialanie.length(); i++) {
+        if (piorytet[i] > 0) {
+            cout << endl << piorytet[i] << ",piorytet\n";
+            cout << dzialanie[piorytet[i]] << ",dzialanie\n";
+        }
 
+    }
+
+
+
+
+
+
+    //int stos1[11] = { 0 }; //tworzenie nowego stosu
+    //stos1[0] = 0; //pływak stosu
+    ////operacje matematyczne na stosie
+    //naStos(dzialanie[piorytet[0] + 1] - 48, stos1);
+    //for (int i = 0; i < dzialanie.length() && piorytet[i] > 0; i++) {
+    //    //cout <<"znak: " << dzialanie[piorytet[i] - 1]<<endl;
+    //    if (dzialanie[piorytet[i] - 1] != ')') {
+    //        naStos(dzialanie[piorytet[i] - 1] - 48, stos1);
+    //        naStos(licz(stos1, dzialanie[piorytet[i]]), stos1);
+    //    }
+    //    else {
+    //        cout << "else" << endl;
+    //        int q = zeStosu(stos1);
+    //        naStos(dzialanie[piorytet[i] + 1] - 48, stos1);
+    //        naStos(q, stos1);
+    //        naStos(licz(stos1, dzialanie[piorytet[i]]), stos1);
+    //    }
+    //}
+    //rozpalStos(stos1);
 }
+
+
+
+//dzialanie[piorytet[i] - 1 = ")"
