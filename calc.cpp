@@ -1,5 +1,7 @@
 ﻿#include <iostream>
+#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 using namespace std;
 //--------------stos-----------------------╗
 bool czyPusty(double* sstos) {
@@ -128,19 +130,44 @@ double licz(string onpString, double* sstos) {
 
 int main()
 {
-    // przechowuje działanie matematyczne
-    string dzialanie;
-    dzialanie = "((1+1)+3)-(9+1-2)";
-
-    //cin >> dzialanie;
-    //cout << endl << dzialanie << endl;
-
-    //wyświetl i zapisz działanie jako ONP
-    cout << endl << "zapis onp : " << toOnp(dzialanie) << endl;
-
+    string dzialanie;  //przechowuje działania matematyczne
     double stos1[100] = { 0 }; //tworzenie nowego stosu
     stos1[0] = 0; //pływak stosu
+    short select;
 
-    //wyświetl wynik
-    cout << endl << "wynik: " << licz(toOnp(dzialanie), stos1) << endl;
+    cout << "|--------------wybierz--------------|"<<endl;
+    cout << "1. Program liczacu ONP" << endl;
+    cout << "2. Informacje o programie" << endl;
+    cout << "3. wyjscie" << endl;
+    cout << "|-----------------------------------|"<<endl;
+    cout << ": ";
+    cin >> select;
+
+    //menu wyboru
+    switch (select)
+    {
+    case 1:
+        system("cls");
+        cout << "podaj dzialanie: ";
+        cin >> dzialanie;
+
+        //wyświetl i zapisz działanie jako ONP
+        cout << endl << "zapis onp : " << toOnp(dzialanie) << endl;
+
+        //wyświetl wynik
+        cout << endl << "wynik: " << licz(toOnp(dzialanie), stos1) << endl;
+        break;
+    case 2:
+        system("cls");
+        cout << "Autor : Krzysztof Bielecki" << endl << "Versja : 2.1" << endl;
+        break;
+    case 3:
+        exit(0);
+        break;
+    default:
+        break;
+    }
+
+
+  
 }
